@@ -5,12 +5,12 @@
       {
         "appID": "V3ZLZAU93Y.com.atlanticus.ngac.dev",
         "paths": [
-          "/benefits/*",
-          "/messages/*",
-          "/profile/*",
-          "/help/*",
-          "/manage/*",
-          "/menu/*"
+          "/test-repo-universal-link/benefits/*",
+          "/test-repo-universal-link/messages/*",
+          "/test-repo-universal-link/profile/*",
+          "/test-repo-universal-link/help/*",
+          "/test-repo-universal-link/manage/*",
+          "/test-repo-universal-link/menu/*"
         ]
       }
     ]
