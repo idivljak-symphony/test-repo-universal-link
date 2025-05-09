@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Benefits API Request</title>
+    <title>Redirect to Benefits</title>
     <style>
         body {
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -26,35 +25,22 @@
         button:hover {
             background-color: #45a049;
         }
-        #response {
-            margin-top: 20px;
-            padding: 10px;
-            max-width: 800px;
-            word-wrap: break-word;
-        }
     </style>
 </head>
 <body>
-    <button onclick="fetchBenefits()">Get Benefits</button>
-    <div id="response"></div>
+    <button onclick="redirectToBenefits()">Go to Benefits</button>
 
     <script>
-        function fetchBenefits() {
-            const benefitId = '1'; // Replace with your actual benefit ID
-            const url = `https://atlanticus.us2.mockoon.app/api/v1/benefits/${benefitId}`;
-            const responseDiv = document.getElementById('response');
+        function redirectToBenefits() {
+            const benefitId = '2'; // Replace with your actual benefit ID
+            const authToken = 'b0822e1907d4d4fcad22b9b07e971241b62431d983421258f1a402b8c86653e26ffebd01ab69c6c7f3cd9410e1882022205a641521725895a2c94ca93748cd7b';
             
-            fetch(url, {
-                method: 'GET',
-                headers: {
-                    'Accept-Language': 'en',
-                    'Accept': 'application/json;charset=UTF-8',
-                    'Authorization': 'b0822e1907d4d4fcad22b9b07e971241b62431d983421258f1a402b8c86653e26ffebd01ab69c6c7f3cd9410e1882022205a641521725895a2c94ca93748cd7b'
-                }
-            })
-            .catch(error => {
-                responseDiv.innerHTML = `<strong>Error:</strong><br>${error.message}`;
-            });
+            const url = new URL(`https://atlanticus.us2.mockoon.app/api/v1/benefits/${benefitId}`);
+            url.searchParams.append('authorization', authToken);
+            url.searchParams.append('accept-language', 'en');
+            url.searchParams.append('accept', 'application/json;charset=UTF-8');
+            
+            window.location.href = url.toString();
         }
     </script>
 </body>
