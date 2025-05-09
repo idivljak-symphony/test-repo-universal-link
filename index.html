@@ -7,6 +7,7 @@
     <style>
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -25,15 +26,23 @@
         button:hover {
             background-color: #45a049;
         }
+        #response {
+            margin-top: 20px;
+            padding: 10px;
+            max-width: 800px;
+            word-wrap: break-word;
+        }
     </style>
 </head>
 <body>
     <button onclick="fetchBenefits()">Get Benefits</button>
+    <div id="response"></div>
 
     <script>
         function fetchBenefits() {
-            const benefitId = '123'; // Replace with your actual benefit ID
+            const benefitId = '1'; // Replace with your actual benefit ID
             const url = `https://atlanticus.us2.mockoon.app/api/v1/benefits/${benefitId}`;
+            const responseDiv = document.getElementById('response');
             
             fetch(url, {
                 method: 'GET',
@@ -44,19 +53,25 @@
                 }
             })
             .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Success:', data);
-                // Handle the response data here
-                alert('Check console for response data');
+                // First, let's see the raw response
+                return response.text().then(text => {
+                    responseDiv.innerHTML = `<strong>Raw Response:</strong><br>${text}`;
+                    console.log('Raw response:', text);
+                    
+                    // Try to parse it as JSON if possible
+                    try {
+                        const data = JSON.parse(text);
+                        console.log('Parsed JSON:', data);
+                        return data;
+                    } catch (e) {
+                        console.error('JSON Parse Error:', e);
+                        throw new Error(`Failed to parse JSON: ${e.message}`);
+                    }
+                });
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('Error occurred. Check console for details.');
+                responseDiv.innerHTML = `<strong>Error:</strong><br>${error.message}`;
             });
         }
     </script>
