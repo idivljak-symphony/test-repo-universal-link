@@ -52,23 +52,6 @@
                     'Authorization': 'b0822e1907d4d4fcad22b9b07e971241b62431d983421258f1a402b8c86653e26ffebd01ab69c6c7f3cd9410e1882022205a641521725895a2c94ca93748cd7b'
                 }
             })
-            .then(response => {
-                // First, let's see the raw response
-                return response.text().then(text => {
-                    responseDiv.innerHTML = `<strong>Raw Response:</strong><br>${text}`;
-                    console.log('Raw response:', text);
-                    
-                    // Try to parse it as JSON if possible
-                    try {
-                        const data = JSON.parse(text);
-                        console.log('Parsed JSON:', data);
-                        return data;
-                    } catch (e) {
-                        console.error('JSON Parse Error:', e);
-                        throw new Error(`Failed to parse JSON: ${e.message}`);
-                    }
-                });
-            })
             .catch(error => {
                 responseDiv.innerHTML = `<strong>Error:</strong><br>${error.message}`;
             });
