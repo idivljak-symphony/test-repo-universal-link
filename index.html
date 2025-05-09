@@ -3,17 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirect to Benefits</title>
+    <title>Universal Link Test</title>
     <style>
         body {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             height: 100vh;
             margin: 0;
             font-family: Arial, sans-serif;
+            gap: 20px;
+            padding: 20px;
         }
-        button {
+        a {
             padding: 15px 30px;
             font-size: 16px;
             cursor: pointer;
@@ -21,27 +24,40 @@
             color: white;
             border: none;
             border-radius: 4px;
+            text-decoration: none;
+            text-align: center;
+            max-width: 400px;
+            word-wrap: break-word;
         }
-        button:hover {
+        a:hover {
             background-color: #45a049;
+        }
+        .note {
+            max-width: 600px;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
         }
     </style>
 </head>
 <body>
-    <button onclick="redirectToBenefits()">Go to Benefits</button>
+    <!-- Universal Link -->
+    <a href="https://idivljak-symphony.github.io/test-repo-universal-link/benefits/2">Open with Universal Link</a>
+    
+    <!-- Custom URL Scheme -->
+    <a href="yourapp://benefits/2">Open with Custom Scheme</a>
+    
+    <!-- Direct API Link (for testing) -->
+    <a href="https://atlanticus.us2.mockoon.app/api/v1/benefits/2">Open Direct API Link</a>
 
-    <script>
-        function redirectToBenefits() {
-            const benefitId = '2'; // Replace with your actual benefit ID
-            const authToken = 'b0822e1907d4d4fcad22b9b07e971241b62431d983421258f1a402b8c86653e26ffebd01ab69c6c7f3cd9410e1882022205a641521725895a2c94ca93748cd7b';
-            
-            const url = new URL(`https://atlanticus.us2.mockoon.app/api/v1/benefits/${benefitId}`);
-            url.searchParams.append('authorization', authToken);
-            url.searchParams.append('accept-language', 'en');
-            url.searchParams.append('accept', 'application/json;charset=UTF-8');
-            
-            window.location.href = url.toString();
-        }
-    </script>
+    <div class="note">
+        <h3>Testing Notes:</h3>
+        <ul>
+            <li>Universal Link: https://idivljak-symphony.github.io/test-repo-universal-link/benefits/2</li>
+            <li>Make sure your apple-app-site-association file is at: https://idivljak-symphony.github.io/.well-known/apple-app-site-association</li>
+            <li>Test on a real iOS device for Universal Links</li>
+            <li>Custom URL scheme should work on both simulator and real device</li>
+        </ul>
+    </div>
 </body>
 </html>
