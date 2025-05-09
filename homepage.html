@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benefits API Request</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="fetchBenefits()">Get Benefits</button>
+
+    <script>
+        function fetchBenefits() {
+            const benefitId = '123'; // Replace with your actual benefit ID
+            const url = `https://atlanticus.us2.mockoon.app/api/v1/benefits/${benefitId}`;
+            
+            fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Accept-Language': 'en',
+                    'Accept': 'application/json;charset=UTF-8',
+                    'Authorization': 'b0822e1907d4d4fcad22b9b07e971241b62431d983421258f1a402b8c86653e26ffebd01ab69c6c7f3cd9410e1882022205a641521725895a2c94ca93748cd7b'
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Success:', data);
+                // Handle the response data here
+                alert('Check console for response data');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error occurred. Check console for details.');
+            });
+        }
+    </script>
+</body>
+</html>
